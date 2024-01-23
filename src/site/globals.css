@@ -152,3 +152,7 @@
       bg-gray-900 dark:bg-gray-100
   }
 }
+
+img {
+  visibility: visible !important;
+}

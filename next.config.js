@@ -15,7 +15,7 @@ const AWS_S3_HOSTNAME =
 
 const createRemotePattern = (hostname) => hostname
   ? {
-    protocol: 'https',
+    protocol: 'http',
     hostname,
     port: '',
     pathname: '/**',
