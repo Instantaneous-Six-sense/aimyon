@@ -23,7 +23,7 @@ export const awsS3Client = () => new S3Client({
 });
 
 export const AWS_S3_BASE_URL =
-  `https://${AWS_S3_BUCKET}.s3.${AWS_S3_REGION}.amazonaws.com`;
+  `http://${AWS_S3_BUCKET}.s3.${AWS_S3_REGION}.amazonaws.com`;
 
 export const isUrlFromAwsS3 = (url: string) =>
   url.startsWith(AWS_S3_BASE_URL);
