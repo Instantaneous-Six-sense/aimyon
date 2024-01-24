@@ -28,7 +28,13 @@ const nextConfig = {
     imageSizes: [200],
     remotePatterns: []
       .concat(createRemotePattern(VERCEL_BLOB_HOSTNAME))
-      .concat(createRemotePattern(AWS_S3_HOSTNAME)),
+      .concat(createRemotePattern(AWS_S3_HOSTNAME))
+      .concat({
+        protocol: 'http',
+        hostname: 'storage.ai-myon.com',
+        port: '', pathname:
+        '/**',
+      }),
     minimumCacheTTL: 31536000,
   },
 };
