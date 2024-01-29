@@ -50,6 +50,11 @@ export default function PhotoLarge({
       {children}
     </div>;
 
+  const NewLineDescription = ({description} : { description: string }) =>
+    description.split('\n').map((str, idx) => str
+      ? <p key={idx}>{str}</p>
+      : <br key={idx} />);
+
   return (
     <SiteGrid
       contentMain={
@@ -128,6 +133,13 @@ export default function PhotoLarge({
                 <li>{photo.isoFormatted}</li>
                 <li>{photo.exposureCompensationFormatted ?? '—'}</li>
               </ul>}
+            {photo.description && <div className={clsx(
+              'flex h-full w-full select-none flex-col justify-end',
+              'p-0 outline-none focus:shadow-md rounded-md',
+              'hidden md:block'
+            )}>
+              <NewLineDescription description={photo.description} />
+            </div>}
             <div className={clsx(
               'flex gap-y-4',
               'flex-col sm:flex-row md:flex-col',

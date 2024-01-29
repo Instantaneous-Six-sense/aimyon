@@ -57,6 +57,12 @@ export interface PhotoDb extends Omit<PhotoDbInsert, 'takenAt' | 'tags'> {
   createdAt: Date
   takenAt: Date
   tags: string[]
+  description?: string
+  width: number
+  height: number
+  likes: number
+  comment: number
+  instagramFeedId: string
 }
 
 // Parsed db response
@@ -119,7 +125,7 @@ export const photoStatsAsString = (photo: Photo) => [
 ].join(' ');
 
 export const descriptionForPhoto = (photo: Photo) =>
-  photo.takenAtNaiveFormatted?.toUpperCase();
+  photo.takenAtNaiveFormatted?.toUpperCase().trim();
 
 export const getPreviousPhoto = (photo: Photo, photos: Photo[]) => {
   const index = photos.findIndex(p => p.id === photo.id);
@@ -160,7 +166,7 @@ export const translatePhotoId = (id: string) =>
   PHOTO_ID_FORWARDING_TABLE[id] || id;
 
 export const titleForPhoto = (photo: Photo) =>
-  photo.title || 'Untitled';
+  photo.title?.trim() || 'Untitled';
 
 export const photoLabelForCount = (count: number) =>
   count === 1 ? 'Photo' : 'Photos';

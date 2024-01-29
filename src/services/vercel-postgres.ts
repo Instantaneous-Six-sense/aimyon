@@ -155,6 +155,11 @@ export const sqlDeletePhoto = (id: string) =>
 const sqlGetPhoto = (id: string) =>
   sql<PhotoDb>`SELECT * FROM photos WHERE id=${id} LIMIT 1`;
 
+const sqlGetSitemapInfos = async () =>
+  sql<{ id: number, taken_at_naive: string }>`
+    SELECT id, taken_at_naive FROM photos
+  `.then(({ rows }) => rows);
+
 const sqlGetPhotosCount = async () => sql`
   SELECT COUNT(*) FROM photos
   WHERE hidden IS NOT TRUE
@@ -416,6 +421,8 @@ export const getPhoto = async (id: string): Promise<Photo | undefined> => {
 };
 export const getPhotosDateRange = () =>
   safelyQueryPhotos(sqlGetPhotosDateRange);
+export const getSitemapInfos = () =>
+  safelyQueryPhotos(sqlGetSitemapInfos);
 export const getPhotosCount = () =>
   safelyQueryPhotos(sqlGetPhotosCount);
 export const getPhotosCountIncludingHidden = () =>
