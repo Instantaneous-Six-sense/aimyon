@@ -1,6 +1,17 @@
-import { IMAGE_LARGE_WIDTH } from '@/site';
+import { IMAGE_LARGE_WIDTH, IMAGE_FULL_WIDTH } from '@/site';
 import Image from 'next/image';
 import Link from 'next/link';
+
+type Props = {
+  className?: string
+  href: string
+  src: string
+  alt: string
+  aspectRatio: number
+  blurData: string
+  priority?: boolean
+  isFull?: boolean
+}
 
 export default function ImageLarge({
   className,
@@ -10,15 +21,8 @@ export default function ImageLarge({
   aspectRatio,
   blurData,
   priority,
-}: {
-  className?: string
-  href: string
-  src: string
-  alt: string
-  aspectRatio: number
-  blurData: string
-  priority?: boolean
-}) {
+  isFull,
+}: Props) {
   return (
     <Link
       href={href}
@@ -31,8 +35,10 @@ export default function ImageLarge({
         priority,
         blurDataURL: blurData,
         placeholder: 'blur',
-        width: IMAGE_LARGE_WIDTH,
-        height: Math.round(IMAGE_LARGE_WIDTH / aspectRatio),
+        width: isFull ? IMAGE_FULL_WIDTH : IMAGE_LARGE_WIDTH,
+        height: Math.round(
+          isFull ? IMAGE_FULL_WIDTH : IMAGE_LARGE_WIDTH / aspectRatio
+        ),
       }} />
     </Link>
   );

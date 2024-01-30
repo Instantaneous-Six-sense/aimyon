@@ -5,7 +5,7 @@ import {
 import { Metadata } from 'next';
 import { redirect } from 'next/navigation';
 import {
-  PATH_ROOT,
+  PATH_GALLERY,
   absolutePathForPhoto,
   absolutePathForPhotoImage,
 } from '@/site/paths';
@@ -59,7 +59,7 @@ export default async function PhotoCameraPage({
 }: PhotoCameraProps & { children: ReactNode }) {
   const photo = await getPhotoCached(photoId);
 
-  if (!photo) { redirect(PATH_ROOT); }
+  if (!photo) { redirect(PATH_GALLERY); }
 
   const camera = cameraFromPhoto(photo, cameraProp);
 

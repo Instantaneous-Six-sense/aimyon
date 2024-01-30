@@ -7,6 +7,7 @@ import SiteGrid from '../components/SiteGrid';
 import { SITE_DOMAIN_OR_TITLE } from '@/site/config';
 import ViewSwitcher, { SwitcherSelection } from '@/site/ViewSwitcher';
 import {
+  PATH_GALLERY,
   PATH_ROOT,
   isPathAdmin,
   isPathGrid,
@@ -37,6 +38,8 @@ export default function NavClient({
 
   const switcherSelectionForPath = (): SwitcherSelection | undefined => {
     if (pathname === PATH_ROOT) {
+      return 'home';
+    } else if (pathname === PATH_GALLERY) {
       return 'full-frame';
     } else if (isPathGrid(pathname)) {
       return 'grid';
@@ -69,7 +72,7 @@ export default function NavClient({
                 />
               </div>
               <div className="hidden xs:block">
-                {renderLink(SITE_DOMAIN_OR_TITLE, PATH_ROOT)}
+                {renderLink(SITE_DOMAIN_OR_TITLE, PATH_GALLERY)}
               </div>
             </div>]
             : []}

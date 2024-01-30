@@ -79,6 +79,7 @@ export default function RootLayout({
               'lg:mx-6 lg:mb-6',
             )}>
               <Suspense fallback={<NavClient />}>
+                {/* @ts-ignore */}
                 <Nav />
               </Suspense>
               <div className={clsx(
@@ -88,6 +89,7 @@ export default function RootLayout({
                 {children}
               </div>
               <Suspense fallback={<FooterClient />}>
+                {/* @ts-ignore */}
                 <Footer />
               </Suspense>
             </main>
@@ -101,3 +103,7 @@ export default function RootLayout({
     </html>
   );
 }
+
+//postgres://default:gXHm6kCh5EuP@ep-withered-scene-07404069-pooler.us-east-1.postgres.vercel-storage.com/verceldb
+//                                ep-withered-scene-07404069-pooler.us-east-1.postgres.vercel-storage.com
+//postgres://default:gXHm6kCh5EuP@ep-withered-scene-07404069-pooler.us-east-1.postgres.vercel-storage.com:5432/verceldb

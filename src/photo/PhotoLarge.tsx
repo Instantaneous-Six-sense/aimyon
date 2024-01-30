@@ -39,6 +39,8 @@ export default function PhotoLarge({
   const tags = sortTags(photo.tags, primaryTag);
 
   const camera = cameraFromPhoto(photo);
+
+  console.log(photo);
   
   const renderMiniGrid = (children: JSX.Element, rightPadding = true) =>
     <div className={clsx(
@@ -89,6 +91,7 @@ export default function PhotoLarge({
                   </Link>
                 </div>
                 <Suspense>
+                  {/* @ts-ignore */}
                   <AdminPhotoMenu
                     photoId={photo.id}
                     buttonClassName="translate-y-[-3.5px]"

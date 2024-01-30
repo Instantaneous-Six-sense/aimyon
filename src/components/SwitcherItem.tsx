@@ -3,13 +3,15 @@ import { clsx } from 'clsx/lite';
 
 export default function SwitcherItem({
   icon,
+  text,
   href,
   className: classNameProp,
   onClick,
   active,
   noPadding,
 }: {
-  icon: JSX.Element
+  icon?: JSX.Element
+  text?: string
   href?: string
   className?: string
   onClick?: () => void
@@ -28,11 +30,25 @@ export default function SwitcherItem({
       : 'text-gray-300 dark:text-gray-700',
   );
 
-  const renderIcon = () => noPadding
-    ? icon
-    : <div className="w-[28px] h-[24px] flex items-center justify-center">
-      {icon}
-    </div>;
+  const renderIcon = () => {
+    if (noPadding && icon) {
+      return icon;
+    } else if (icon) {
+      return (
+        <div className="w-[28px] h-[24px] flex items-center justify-center">
+          {icon}
+        </div>
+      );
+    } else if (noPadding && text) {
+      return text;
+    } else {
+      return (
+        <div className="h-[24px] flex items-center justify-center">
+          {text}
+        </div>
+      );
+    }
+  };
 
   return (
     href

@@ -5,22 +5,23 @@ import {
 import { Metadata } from 'next';
 import { redirect } from 'next/navigation';
 import {
-  PATH_ROOT,
+  PATH_GALLERY,
   absolutePathForPhoto,
   absolutePathForPhotoImage,
 } from '@/site/paths';
 import PhotoDetailPage from '@/photo/PhotoDetailPage';
 import { getPhotoCached } from '@/cache';
-import { getPhotosTagDataCached } from '@/tag/data';
 import { ReactNode } from 'react';
+import { FilmSimulation } from '@/simulation';
+import { getPhotosFilmSimulationDataCached } from '@/simulation/data';
 
-interface PhotoTagProps {
-  params: { photoId: string, tag: string }
+interface PhotoFilmSimulationProps {
+  params: { photoId: string, simulation: FilmSimulation }
 }
 
 export async function generateMetadata({
-  params: { photoId, tag },
-}: PhotoTagProps): Promise<Metadata> {
+  params: { photoId, simulation },
+}: PhotoFilmSimulationProps): Promise<Metadata> {
   const photo = await getPhotoCached(photoId);
 
   if (!photo) { return {}; }
@@ -28,7 +29,7 @@ export async function generateMetadata({
   const title = titleForPhoto(photo);
   const description = descriptionForPhoto(photo);
   const images = absolutePathForPhotoImage(photo);
-  const url = absolutePathForPhoto(photo, tag);
+  const url = absolutePathForPhoto(photo, simulation);
 
   return {
     title,
@@ -48,22 +49,22 @@ export async function generateMetadata({
   };
 }
 
-export default async function PhotoTagPage({
-  params: { photoId, tag },
+export default async function PhotoFilmSimulationPage({
+  params: { photoId, simulation },
   children,
-}: PhotoTagProps & { children: ReactNode }) {
+}: PhotoFilmSimulationProps & { children: ReactNode }) {
   const photo = await getPhotoCached(photoId);
 
-  if (!photo) { redirect(PATH_ROOT); }
+  if (!photo) { redirect(PATH_GALLERY); }
 
   const [
     photos,
     count,
     dateRange,
-  ] = await getPhotosTagDataCached({ tag });
+  ] = await getPhotosFilmSimulationDataCached({ simulation });
 
   return <>
     {children}
-    <PhotoDetailPage {...{ photo, photos, tag, count, dateRange }} />
+    <PhotoDetailPage {...{ photo, photos, simulation, count, dateRange }} />
   </>;
 }

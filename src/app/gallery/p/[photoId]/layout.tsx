@@ -6,7 +6,7 @@ import {
 import { Metadata } from 'next';
 import { redirect } from 'next/navigation';
 import {
-  PATH_ROOT,
+  PATH_GALLERY,
   absolutePathForPhoto,
   absolutePathForPhotoImage,
 } from '@/site/paths';
@@ -60,7 +60,7 @@ export default async function PhotoPage({
 
   const photo = photos.find(p => p.id === photoId);
 
-  if (!photo) { redirect(PATH_ROOT); }
+  if (!photo) { redirect(PATH_GALLERY); }
   
   const isPhotoFirst = photos.findIndex(p => p.id === photoId) === 0;
 

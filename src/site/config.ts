@@ -2,6 +2,10 @@ import { makeUrlAbsolute, shortenUrl } from '@/utility/url';
 
 // META / DOMAINS
 
+export const SITE_CREATED_AT = '2022-08-01';
+
+export const SITE_TAGS = ['aimyon', 'aimyon36'];
+
 export const SITE_TITLE =
   process.env.NEXT_PUBLIC_SITE_TITLE ||
   'Photo Blog';
@@ -28,7 +32,7 @@ export const SITE_DESCRIPTION =
 
 export const BASE_URL = process.env.NODE_ENV === 'production'
   ? makeUrlAbsolute(SITE_DOMAIN)?.toLowerCase()
-  : 'http://localhost:3000';
+  : 'http://localhost:3001';
 
 // STORAGE: VERCEL BLOB
 export const HAS_VERCEL_BLOB =

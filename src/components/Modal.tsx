@@ -6,7 +6,7 @@ import { clsx } from 'clsx/lite';
 import useClickInsideOutside from '@/utility/useClickInsideOutside';
 import { useRouter } from 'next/navigation';
 import AnimateItems from './AnimateItems';
-import { PATH_ROOT } from '@/site/paths';
+import { PATH_GALLERY } from '@/site/paths';
 import usePrefersReducedMotion from '@/utility/usePrefersReducedMotion';
 
 export default function Modal({
@@ -33,7 +33,7 @@ export default function Modal({
   useClickInsideOutside({
     htmlElements,
     onClickOutside: () => router.push(
-      onClosePath ?? PATH_ROOT,
+      onClosePath ?? PATH_GALLERY,
       { scroll: false },
     ),
   });

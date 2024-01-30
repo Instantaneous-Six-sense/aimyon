@@ -2,11 +2,16 @@ import Switcher from '@/components/Switcher';
 import SwitcherItem from '@/components/SwitcherItem';
 import IconFullFrame from '@/site/IconFullFrame';
 import IconGrid from '@/site/IconGrid';
-import { PATH_ADMIN_PHOTOS, PATH_GRID, PATH_SETS } from '@/site/paths';
+import {
+  PATH_ADMIN_PHOTOS, PATH_GALLERY, PATH_GRID, PATH_ROOT, PATH_SETS,
+} from '@/site/paths';
 import { BiLockAlt } from 'react-icons/bi';
 import IconSets from './IconSets';
+import IconCat from './IconCat';
+import IconCake from './IconCake';
 
-export type SwitcherSelection = 'full-frame' | 'grid' | 'sets' | 'admin';
+export type SwitcherSelection =
+  'home' | 'full-frame' | 'grid' | 'sets' | 'admin';
 
 export default function ViewSwitcher({
   currentSelection,
@@ -18,8 +23,13 @@ export default function ViewSwitcher({
   return (
     <Switcher>
       <SwitcherItem
+        icon={<IconCake />}
+        href={PATH_ROOT}
+        active={currentSelection === 'home'}
+      />
+      <SwitcherItem
         icon={<IconFullFrame />}
-        href="/"
+        href={PATH_GALLERY}
         active={currentSelection === 'full-frame'}
         noPadding
       />

@@ -9,17 +9,18 @@ import { FilmSimulation } from '@/simulation';
 
 // Core paths
 export const PATH_ROOT      = '/';
-export const PATH_GRID      = '/grid';
-export const PATH_SETS      = '/sets';
+export const PATH_GALLERY   = '/gallery';
+export const PATH_GRID      = '/gallery/grid';
+export const PATH_SETS      = '/gallery/sets';
 export const PATH_ADMIN     = '/admin';
 export const PATH_SIGN_IN   = '/sign-in';
 export const PATH_OG        = '/og';
 
 // Path prefixes
-export const PREFIX_PHOTO           = '/p';
-export const PREFIX_TAG             = '/tag';
-export const PREFIX_CAMERA          = '/shot-on';
-export const PREFIX_FILM_SIMULATION = '/film';
+export const PREFIX_PHOTO           = '/gallery/p';
+export const PREFIX_TAG             = '/gallery/tag';
+export const PREFIX_CAMERA          = '/gallery/shot-on';
+export const PREFIX_FILM_SIMULATION = '/gallery/film';
 
 // Dynamic paths
 const PATH_PHOTO_DYNAMIC            = `${PREFIX_PHOTO}/[photoId]`;
@@ -49,7 +50,7 @@ export const PATHS_ADMIN = [
 ];
 
 export const PATHS_TO_CACHE = [
-  PATH_ROOT,
+  PATH_GALLERY,
   PATH_GRID,
   PATH_SETS,
   PATH_OG,
@@ -67,7 +68,7 @@ const pathWithNext = (path: string, next?: number) =>
   next !== undefined ? `${path}?${NEXT}=${next}` : path;
 
 export const pathForRoot = (next?: number) =>
-  pathWithNext(PATH_ROOT, next);
+  pathWithNext(PATH_GALLERY, next);
 
 export const pathForGrid = (next?: number) =>
   pathWithNext(PATH_GRID, next);

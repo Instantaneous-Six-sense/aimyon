@@ -10,24 +10,42 @@
  */
 
 import { getSitemapInfos } from '@/services/vercel-postgres';
+import { SITE_CREATED_AT, SITE_TAGS } from '@/site/config';
+import {
+  PATH_ADMIN,
+  PATH_GALLERY,
+  PATH_GRID,
+  PATH_OG,
+  PATH_SETS,
+  PATH_SIGN_IN,
+  PREFIX_PHOTO,
+  PREFIX_TAG,
+} from '@/site/paths';
 import type { MetadataRoute } from 'next';
 
 type Sitemap = MetadataRoute.Sitemap;
 
 export default async function sitemap(): Promise<Sitemap> {
   const photos: Sitemap = (await getSitemapInfos()).map((sitemapInfo) => ({
-    url: `https://ai-myon.com/p/${sitemapInfo.id}`,
+    url: `https://ai-myon.com${PREFIX_PHOTO}/${sitemapInfo.id}`,
     lastModified: sitemapInfo.taken_at_naive.replace(' ', 'T') + '+09:00',
     priority: 0.8,
   }));
+  const tags: Sitemap = SITE_TAGS.map((tag) => ({
+    url: `https://ai-myon.com${PREFIX_TAG}/${tag}`,
+    lastModified: SITE_CREATED_AT,
+    priority: 0.8,
+  }));
 
-  const routes: Sitemap = ['', '/grid', '/sets', '/sign-in'].map(
-    (route) => ({
-      url: 'https://ai-myon.com' + route,
-      lastModified: new Date().toISOString().split('T')[0],
-      priority: 1,
-    })
-  );
+  const routes: Sitemap =
+  ['', PATH_GALLERY, PATH_GRID, PATH_SETS, PATH_OG, PATH_ADMIN, PATH_SIGN_IN]
+    .map(
+      (route) => ({
+        url: 'https://ai-myon.com' + route,
+        lastModified: SITE_CREATED_AT,
+        priority: 1,
+      })
+    );
 
-  return [...routes, ...photos];
+  return [...routes,  ...tags, ...photos];
 }
