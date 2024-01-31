@@ -22,6 +22,7 @@ import {
   getPhotosFilmSimulationCount,
   getPhotosDateRange,
   getPhotosNearId,
+  getContents,
 } from '@/services/vercel-postgres';
 import { parseCachedPhotoDates, parseCachedPhotosDates } from '@/photo';
 import { getBlobPhotoUrls, getBlobUploadUrls } from '@/services/blob';
@@ -34,6 +35,7 @@ import { auth } from '@/auth';
 // Table key
 const KEY_PHOTOS            = 'photos';
 const KEY_PHOTO             = 'photo';
+const KEY_CONTENTS          = 'contents';
 // Field keys
 const KEY_TAGS              = 'tags';
 const KEY_CAMERAS           = 'cameras';
@@ -235,3 +237,11 @@ export const getImageCacheHeadersForAuth = (session: Session | null) => {
       : 's-maxage=1, stale-while-revalidate=59',
   };
 };
+
+// INFORMATION
+
+export const getContentsCached =
+  unstable_cache(
+    getContents,
+    [KEY_CONTENTS],
+  );

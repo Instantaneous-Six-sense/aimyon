@@ -26,10 +26,15 @@ module.exports = {
       'xl': '1rem',
       '2xl': '1.1rem',
       '3xl': ['1.3rem', '1.7rem'],
+      '4xl': ['1.5rem', '1.9rem'],
+      'title': ['3rem', '4.5rem'],
     },
     extend: {
       fontFamily: {
         'mono': ['var(--font-ibm-plex-mono)', ...defaultTheme.fontFamily.mono],
+        'roboto': ['var(--font-roboto)'],
+        'glacial': ['var(--font-glacial)'],
+        'yakuhan': ['var(--font-yakuhan)'],
       },
       animation: {
         'rotate-pulse':

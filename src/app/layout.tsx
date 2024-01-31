@@ -1,7 +1,7 @@
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/react';
 import { clsx } from 'clsx/lite';
-import { IBM_Plex_Mono } from 'next/font/google';
+import { IBM_Plex_Mono, Roboto } from 'next/font/google';
 import { Metadata } from 'next';
 import { BASE_URL, SITE_DESCRIPTION, SITE_TITLE } from '@/site/config';
 import StateProvider from '@/state/AppStateProvider';
@@ -13,6 +13,7 @@ import Footer from '@/site/Footer';
 import { Suspense } from 'react';
 import FooterClient from '@/site/FooterClient';
 import NavClient from '@/site/NavClient';
+import localFont from 'next/font/local';
 
 import '../site/globals.css';
 
@@ -20,6 +21,36 @@ const ibmPlexMono = IBM_Plex_Mono({
   subsets: ['latin'],
   weight: ['400', '500', '700'],
   variable: '--font-ibm-plex-mono',
+});
+const roboto = Roboto({
+  subsets: ['latin'],
+  weight: ['400', '500', '700', '900'],
+  variable: '--font-roboto',
+});
+const glacial = localFont({
+  src: [
+    {
+      path: '../../public/font/glacialindifference-bold-webfont.woff2',
+    },
+  ],
+  variable: '--font-glacial',
+});
+const yakuhan = localFont({
+  src: [
+    {
+      weight: '400',
+      path: '../../public/font/YakuHanJP-Regular.woff2',
+    },
+    {
+      weight: '700',
+      path: '../../public/font/YakuHanJP-Bold.woff2',
+    },
+    {
+      weight: '900',
+      path: '../../public/font/YakuHanJP-Black.woff2',
+    },
+  ],
+  variable: '--font-yakuhan',
 });
 
 export const metadata: Metadata = {
@@ -71,7 +102,12 @@ export default function RootLayout({
       // next-themes behavior
       suppressHydrationWarning
     >
-      <body className={ibmPlexMono.variable}>
+      <body className={clsx(
+        ibmPlexMono.variable,
+        roboto.variable,
+        glacial.variable,
+        yakuhan.variable
+      )}>
         <StateProvider>
           <ThemeProviderClient>
             <main className={clsx(
@@ -103,7 +139,3 @@ export default function RootLayout({
     </html>
   );
 }
-
-//postgres://default:gXHm6kCh5EuP@ep-withered-scene-07404069-pooler.us-east-1.postgres.vercel-storage.com/verceldb
-//                                ep-withered-scene-07404069-pooler.us-east-1.postgres.vercel-storage.com
-//postgres://default:gXHm6kCh5EuP@ep-withered-scene-07404069-pooler.us-east-1.postgres.vercel-storage.com:5432/verceldb

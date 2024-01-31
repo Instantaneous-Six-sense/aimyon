@@ -12,6 +12,7 @@ import { parameterize } from '@/utility/string';
 import { Tags } from '@/tag';
 import { FilmSimulation, FilmSimulations } from '@/simulation';
 import { PRIORITY_ORDER_ENABLED } from '@/site/config';
+import { Contents } from '@/contents';
 
 const PHOTO_DEFAULT_LIMIT = 100;
 
@@ -454,3 +455,9 @@ export const getPhotosFilmSimulationDateRange =
     sqlGetPhotosFilmSimulationDateRange(simulation));
 export const getPhotosFilmSimulationCount = (simulation: FilmSimulation) =>
   safelyQueryPhotos(() => sqlGetPhotosFilmSimulationCount(simulation));
+
+// INFORMATION
+
+export const getContents = () => sql<Contents>`
+  SELECT DISTINCT * FROM contents
+  `.then(({ rows }) => rows);
