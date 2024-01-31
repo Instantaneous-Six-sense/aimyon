@@ -16,7 +16,7 @@ const VERCEL_URL = VERCEL_BRANCH_URL && VERCEL_BRANCH
   ? `${VERCEL_BRANCH_URL.split(`-git-${VERCEL_BRANCH}-`)[0]}.vercel.app`
   : undefined;
 
-const SITE_DOMAIN =
+export const SITE_DOMAIN =
   process.env.NEXT_PUBLIC_SITE_DOMAIN ||
   VERCEL_URL;
 

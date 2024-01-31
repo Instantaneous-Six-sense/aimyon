@@ -12,7 +12,7 @@ import { parameterize } from '@/utility/string';
 import { Tags } from '@/tag';
 import { FilmSimulation, FilmSimulations } from '@/simulation';
 import { PRIORITY_ORDER_ENABLED } from '@/site/config';
-import { Contents } from '@/contents';
+import { Contents, Records, RecordsTrack } from '@/contents';
 
 const PHOTO_DEFAULT_LIMIT = 100;
 
@@ -456,8 +456,25 @@ export const getPhotosFilmSimulationDateRange =
 export const getPhotosFilmSimulationCount = (simulation: FilmSimulation) =>
   safelyQueryPhotos(() => sqlGetPhotosFilmSimulationCount(simulation));
 
-// INFORMATION
+// LANDING PAGE
 
 export const getContents = () => sql<Contents>`
   SELECT DISTINCT * FROM contents
   `.then(({ rows }) => rows);
+export const getRecords = () => sql<Records>`
+  SELECT DISTINCT * FROM record
+`.then(async ({ rows }) => {
+    const recordsTrack =
+      await getRecordsTrack(rows.map((row) => row.record_no));
+
+    rows.forEach((row) => {
+      row.track =
+        recordsTrack.filter((track) => track.record_no === row.record_no);
+    });
+
+    return rows;
+  });
+export const getRecordsTrack = (recordNos: number[]) => sql<RecordsTrack>`
+  SELECT DISTINCT * FROM record_track
+  WHERE record_no IN(${recordNos.join(',')})
+`.then(({ rows}) => rows);
