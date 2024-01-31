@@ -3,7 +3,12 @@ import { SpeedInsights } from '@vercel/speed-insights/react';
 import { clsx } from 'clsx/lite';
 import { IBM_Plex_Mono, Roboto } from 'next/font/google';
 import { Metadata } from 'next';
-import { BASE_URL, SITE_DESCRIPTION, SITE_TITLE } from '@/site/config';
+import {
+  BASE_URL,
+  SITE_DESCRIPTION,
+  SITE_DOMAIN,
+  SITE_TITLE,
+} from '@/site/config';
 import StateProvider from '@/state/AppStateProvider';
 import ThemeProviderClient from '@/site/ThemeProviderClient';
 import Nav from '@/site/Nav';
@@ -60,6 +65,11 @@ export const metadata: Metadata = {
   openGraph: {
     title: SITE_TITLE,
     description: SITE_DESCRIPTION,
+    url: SITE_DOMAIN,
+    siteName: SITE_TITLE,
+    locale: 'ja_JP',
+    alternateLocale: ['en_US', 'ko_KR'],
+    type: 'website',
   },
   twitter: {
     title: SITE_TITLE,

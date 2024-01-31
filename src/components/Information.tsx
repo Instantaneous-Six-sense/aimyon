@@ -1,8 +1,8 @@
 import { Contents } from '@/contents';
 import { formatDateFromOrientalString } from '@/utility/date';
 import { GoHorizontalRule } from 'react-icons/go';
-import { AiOutlineSwapLeft } from 'react-icons/ai';
 import clsx from 'clsx';
+import ViewMore from './ViewMore';
 
 type InformationProps = {
   contents: Contents[]
@@ -41,15 +41,7 @@ function InformationSection({ section }: InformationSectionProps) {
           <InformationItem key={idx} content={content} />
         ))}
       </div>
-      <a id="media-view-more" className={clsx(
-        'flex justify-end items-end',
-        'mt-10 max-w-xl lg:max-w-full',
-        'text-dim',
-        'transition-colors cursor-pointer'
-      )}>
-        <AiOutlineSwapLeft size={20} />
-        <span>VIEW MORE</span>
-      </a>
+      <ViewMore />
     </div>
   ));
 }

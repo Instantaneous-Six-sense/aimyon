@@ -1,4 +1,4 @@
-import { getContentsCached, getPhotosCached } from '@/cache';
+import { getContentsCached, getPhotosCached, getRecordsCached } from '@/cache';
 import { generateOgImageMetaForPhotos } from '@/photo';
 import { PaginationParams } from '@/site/pagination';
 import { Metadata } from 'next';
@@ -6,6 +6,7 @@ import { MAX_PHOTOS_TO_SHOW_OG } from '@/photo/image-response';
 import Animate from '@/components/Animate';
 import ImageLarge from '@/components/ImageLarge';
 import Information from '@/components/Information';
+import NewRelease from '@/components/NewRelease';
 
 export const runtime = 'edge';
 
@@ -22,8 +23,10 @@ const blurData = 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1B
 export default async function HomePage({ searchParams }: PaginationParams) {
   const [
     contents,
+    [records],
   ] = await Promise.all([
     getContentsCached(),
+    getRecordsCached(),
   ]);
 
   return (
@@ -50,6 +53,9 @@ export default async function HomePage({ searchParams }: PaginationParams) {
         distanceOffset={0}
       >
         <Information contents={contents} />
+      </Animate>
+      <Animate>
+        <NewRelease record={records} />
       </Animate>
     </div>
   );
