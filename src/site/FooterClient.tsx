@@ -67,7 +67,7 @@ export default function FooterClient({
                 <ThemeSwitcher />
               </div>
             </div>, 
-            <NavSns key={'nav-sns'} />,
+            <NavSns key='nav-sns' />,
             <div key="title" className={clsx(
               'flex items-center gap-2',
               'min-h-[4rem]',

@@ -183,8 +183,15 @@
     @apply
       bg-gray-900 dark:bg-gray-100
   }
+  .tax-code {
+    font-size: 11px;
+  }
 }
 
 img {
   visibility: visible !important;
+}
+
+html, body {
+  -webkit-font-smoothing: antialiased;
 }
