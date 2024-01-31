@@ -4,7 +4,7 @@ import { clsx } from 'clsx/lite';
 import SiteGrid from '../components/SiteGrid';
 import ThemeSwitcher from '@/site/ThemeSwitcher';
 import Link from 'next/link';
-import { SHOW_REPO_LINK } from '@/site/config';
+import { SHOW_REPO_LINK, SITE_TITLE } from '@/site/config';
 import RepoLink from '../components/RepoLink';
 import { usePathname } from 'next/navigation';
 import { isPathAdmin, isPathSignIn, pathForAdminPhotos } from './paths';
@@ -12,6 +12,8 @@ import SubmitButtonWithStatus from '@/components/SubmitButtonWithStatus';
 import { signOutAction } from '@/auth/actions';
 import Spinner from '@/components/Spinner';
 import AnimateItems from '@/components/AnimateItems';
+import { FaRegCopyright } from 'react-icons/fa6';
+import NavSns from './NavSns';
 
 export default function FooterClient({
   userEmail,
@@ -45,6 +47,7 @@ export default function FooterClient({
                       <Spinner />}
                     {userEmail && <>
                       <div>{userEmail}</div>
+                      {/* @ts-ignore */}
                       <form action={signOutAction}>
                         <SubmitButtonWithStatus styleAsLink>
                           Sign out
@@ -63,6 +66,15 @@ export default function FooterClient({
               <div className="flex items-center h-4">
                 <ThemeSwitcher />
               </div>
+            </div>, 
+            <NavSns key={'nav-sns'} />,
+            <div key="title" className={clsx(
+              'flex items-center gap-2',
+              'min-h-[4rem]',
+              'font-roboto'
+            )}>
+              <FaRegCopyright />
+              <h1>{SITE_TITLE}</h1>
             </div>]
             : []}
         />}
