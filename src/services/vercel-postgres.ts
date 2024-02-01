@@ -461,20 +461,25 @@ export const getPhotosFilmSimulationCount = (simulation: FilmSimulation) =>
 export const getContents = () => sql<Contents>`
   SELECT DISTINCT * FROM contents
   `.then(({ rows }) => rows);
-export const getRecords = () => sql<Records>`
-  SELECT DISTINCT * FROM record
-`.then(async ({ rows }) => {
-    const recordsTrack =
-      await getRecordsTrack(rows.map((row) => row.record_no));
+export const getRecords = async () => {
+  const querys = [sql<Records>`
+    SELECT DISTINCT * FROM record
+    ORDER BY release_at DESC
+  `.then(async ({ rows }) => rows), 
+  sql<RecordsTrack>`
+    SELECT DISTINCT * FROM record_track
+  `.then(({ rows }) => rows)];
 
-    rows.forEach((row) => {
-      row.track =
-        recordsTrack.filter((track) => track.record_no === row.record_no);
-    });
+  const [records, recordsTrack] =
+    (await Promise.all(querys)) as [Records[], RecordsTrack[]];
 
-    return rows;
+  records.forEach((row) => {
+    row.track =
+      recordsTrack.filter(({ record_no }) => record_no === row.record_no);
   });
-export const getRecordsTrack = (recordNos: number[]) => sql<RecordsTrack>`
+
+  return records;
+};
+export const getRecordsTrack = () => sql<RecordsTrack>`
   SELECT DISTINCT * FROM record_track
-  WHERE record_no IN(${recordNos.join(',')})
-`.then(({ rows}) => rows);
+`.then(({ rows }) => rows);
