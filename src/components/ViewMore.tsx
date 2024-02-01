@@ -1,9 +1,10 @@
 import clsx from 'clsx';
+import Link from 'next/link';
 import { AiOutlineSwapLeft } from 'react-icons/ai';
 
-export default function ViewMore() {
+export default function ViewMore({ href }: { href: string }) {
   return (
-    <a id="media-view-more" className={clsx(
+    <Link href={href} id="media-view-more" className={clsx(
       'flex justify-end items-end',
       'mt-10 max-w-xl lg:max-w-full',
       'text-dim text-lg font-yakuhan',
@@ -13,6 +14,6 @@ export default function ViewMore() {
         relative top-1
       `} />
       <span>VIEW MORE</span>
-    </a>
+    </Link>
   );
 }

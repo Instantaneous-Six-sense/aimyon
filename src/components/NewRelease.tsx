@@ -4,9 +4,15 @@ import clsx from 'clsx';
 import Image from 'next/image';
 import ViewMore from './ViewMore';
 
+import dynamic from 'next/dynamic';
+ 
+const NewReleaseDescription = dynamic(() =>
+  import('./NewReleaseDescription'), { ssr: false });
+
 export type NewReleaseProps = {
   record: Records
 }
+
 
 export default function NewRelease({ record }: NewReleaseProps) {
   return (
@@ -25,7 +31,7 @@ export default function NewRelease({ record }: NewReleaseProps) {
               height={500}
             />
           </div>
-          <article className="text-xl">
+          <div className="text-xl">
             <p className="font-glacial">{record.type}</p>
             <h3 className={clsx(
               'text-[32px] font-[800]', 
@@ -39,16 +45,9 @@ export default function NewRelease({ record }: NewReleaseProps) {
               catalogueNo={record.catalogue_no}
               tracks={record.track}
             />
-            {
-              record.description && (
-                <div
-                  dangerouslySetInnerHTML={{__html: record.description}}
-                  className="text-sm"
-                />
-              )
-            }
-            <ViewMore />
-          </article>
+            <NewReleaseDescription description={record.description} />
+            <ViewMore href={'/record'} />
+          </div>
         </div>
       </div>
     </section>
@@ -60,6 +59,7 @@ type RecordDetailProps = {
   catalogueNo: Records['catalogue_no']
   tracks: Records['track'];
 }
+
 
 function RecordDetail({ price, catalogueNo, tracks }: RecordDetailProps) {
   const priceFormat =

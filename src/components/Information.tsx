@@ -41,7 +41,7 @@ function InformationSection({ section }: InformationSectionProps) {
           <InformationItem key={idx} content={content} />
         ))}
       </div>
-      <ViewMore />
+      <ViewMore href={section.link} />
     </div>
   ));
 }

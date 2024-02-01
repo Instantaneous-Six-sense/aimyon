@@ -28,11 +28,11 @@ const snsNavItems = [{
   icon: <FaYoutube size={ICON_SIZE} title={'Youtube'} />,
 }];
 
-export default function NavSns({ key }: { key: React.Key }) {
+export default function NavSns() {
   return (
-    <ul key={key} className="flex items-center gap-4">
+    <ul className="flex items-center gap-4">
       {
-        snsNavItems.map(({ url, icon }, idx) =>(<li key={idx}>
+        snsNavItems.map(({ url, icon }, idx) => (<li key={idx}>
           <a href={url}>
             {icon}
           </a>
