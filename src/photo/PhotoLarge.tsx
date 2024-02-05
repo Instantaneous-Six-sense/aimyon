@@ -40,8 +40,6 @@ export default function PhotoLarge({
 
   const camera = cameraFromPhoto(photo);
 
-  console.log(photo);
-  
   const renderMiniGrid = (children: JSX.Element, rightPadding = true) =>
     <div className={clsx(
       'flex gap-y-4',
@@ -108,7 +106,7 @@ export default function PhotoLarge({
                   type="text-only"
                 />
                 {showSimulation && photo.filmSimulation &&
-                  <div className="translate-x-[-0.3rem]"> 
+                  <div className="translate-x-[-0.3rem]">
                     <PhotoFilmSimulation
                       simulation={photo.filmSimulation}
                     />

@@ -1,7 +1,7 @@
 import AnimateItems from '@/components/AnimateItems';
 import { Records } from '@/contents';
 import clsx from 'clsx';
-import Image from 'next/image';
+import Card from './Card';
 
 export default function RecrodGrid({ records }: { records: Records[] }) {
   return (
@@ -17,21 +17,7 @@ export default function RecrodGrid({ records }: { records: Records[] }) {
         distanceOffset={0}
         staggerOnFirstLoadOnly
         items={records.map((record, idx) => (
-          <div key={idx} className={clsx(
-            'relative w-full h-full overflow-hidden max-w-[300px]',
-            'rounded-lg shadow-lg hover:shadow-2xl',
-            'transition-all duration-300 ease-in-out',
-            'cursor-pointer'
-          )}>
-            <Image
-              src={record.image}
-              width={300}
-              height={300}
-              objectFit='cover'
-              alt={record.title}
-              style={{ height: '100%', width: '100%' }}
-            />
-          </div>
+          <Card key={idx} record={record} />
         ))}
       />
     </div>
