@@ -15,18 +15,21 @@ export const PATH_SETS      = '/gallery/sets';
 export const PATH_ADMIN     = '/admin';
 export const PATH_SIGN_IN   = '/sign-in';
 export const PATH_OG        = '/og';
+export const PATH_RECORD    = '/record';
 
 // Path prefixes
 export const PREFIX_PHOTO           = '/gallery/p';
 export const PREFIX_TAG             = '/gallery/tag';
 export const PREFIX_CAMERA          = '/gallery/shot-on';
 export const PREFIX_FILM_SIMULATION = '/gallery/film';
+export const PREFIX_RECORD          = '/record/r';
 
 // Dynamic paths
 const PATH_PHOTO_DYNAMIC            = `${PREFIX_PHOTO}/[photoId]`;
 const PATH_TAG_DYNAMIC              = `${PREFIX_TAG}/[tag]`;
 const PATH_CAMERA_DYNAMIC           = `${PREFIX_CAMERA}/[camera]`;
 const PATH_FILM_SIMULATION_DYNAMIC  = `${PREFIX_FILM_SIMULATION}/[simulation]`;
+const PATH_RECORD_DYNAMIC           = `${PREFIX_RECORD}/[recordNo]`;
 
 // Admin paths
 export const PATH_ADMIN_PHOTOS        = `${PATH_ADMIN}/photos`;
@@ -319,4 +322,32 @@ export const getEscapePath = (pathname?: string) => {
   )) {
     return pathForFilmSimulation(simulation);
   }
+};
+
+// Record
+export const absolutePathForRecord = (recordNo: number) => {
+  return `${BASE_URL}${PREFIX_RECORD}/${recordNo}`;
+};
+export const pathForRecord = (recordTitle: string) => {
+  return `${PREFIX_RECORD}/${recordTitle}`;
+};
+
+export const RECORD_MATCHER = {
+  1: 'あのね',
+  2: 'ノット・オーケー',
+  3: '愛の花 初回限定盤',
+  4: '愛の花 通常盤',
+  5: '瞳へ落ちるよレコード 12inchアナログレコード［完全生産限定盤］',
+  6: '瞳へ落ちるよレコード 初回限定盤',
+  7: '瞳へ落ちるよレコード 通常盤',
+  8: '初恋が泣いている',
+  9: 'ハート',
+};
+export const RECORD_MATCHER_REVERSE =
+  {} as Record<string, keyof typeof RECORD_MATCHER>;
+Object.entries(RECORD_MATCHER).forEach(([key, value]) => {
+  RECORD_MATCHER_REVERSE[value] = key as unknown as keyof typeof RECORD_MATCHER;
+});
+export const getRecordNoByTitle = (title: string) => {
+  return RECORD_MATCHER_REVERSE[decodeURI(title)];
 };
