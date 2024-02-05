@@ -24,6 +24,7 @@ import {
   getPhotosNearId,
   getContents,
   getRecords,
+  getRecord,
 } from '@/services/vercel-postgres';
 import { parseCachedPhotoDates, parseCachedPhotosDates } from '@/photo';
 import { getBlobPhotoUrls, getBlobUploadUrls } from '@/services/blob';
@@ -37,6 +38,7 @@ import { auth } from '@/auth';
 const KEY_PHOTOS            = 'photos';
 const KEY_PHOTO             = 'photo';
 const KEY_CONTENTS          = 'contents';
+const KEY_RECORD            = 'record';
 const KEY_RECORDS           = 'records';
 // Field keys
 const KEY_TAGS              = 'tags';
@@ -247,6 +249,13 @@ export const getContentsCached =
     getContents,
     [KEY_CONTENTS],
   );
+export const getRecordCached = (
+  ...args: Parameters<typeof getRecord>
+) =>
+  unstable_cache(
+    getRecord,
+    [KEY_RECORD]
+  )(...args);
 export const getRecordsCached =
   unstable_cache(
     getRecords,

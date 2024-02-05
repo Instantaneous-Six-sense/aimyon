@@ -5,7 +5,8 @@ import Image from 'next/image';
 import ViewMore from './ViewMore';
 
 import dynamic from 'next/dynamic';
- 
+import TrackList from './TrackList';
+
 const NewReleaseDescription = dynamic(() =>
   import('./NewReleaseDescription'), { ssr: false });
 
@@ -34,7 +35,7 @@ export default function NewRelease({ record }: NewReleaseProps) {
           <div className="text-xl">
             <p className="font-glacial">{record.type}</p>
             <h3 className={clsx(
-              'text-[32px] font-[800]', 
+              'text-[32px] font-[800]',
               'leading-[3rem] tracking-wider mb-2')}
             >{record.title}</h3>
             <p className="text-2xl font-glacial">
@@ -79,15 +80,7 @@ function RecordDetail({ price, catalogueNo, tracks }: RecordDetailProps) {
         <p>/</p>
         <p>{catalogueNo}</p>
       </div>
-      <div id="tracks" className="py-8 flex flex-col gap-1.5">
-        {tracks?.map((track, index) => (
-          <div key={index}>
-            <p className="flex items-center gap-2">
-              <span>{index + 1}.</span>
-              {track.title}
-            </p>
-          </div>))}
-      </div>
+      <TrackList tracks={tracks} />
     </>
   );
 }
