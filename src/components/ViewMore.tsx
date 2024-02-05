@@ -8,12 +8,15 @@ export default function ViewMore({ href }: { href: string }) {
       'flex justify-end items-end',
       'mt-10 max-w-xl lg:max-w-full',
       'text-dim text-lg font-yakuhan',
-      'transition-colors cursor-pointer'
+      'transition-colors cursor-pointer',
     )}>
       <AiOutlineSwapLeft size={20} className={`
         relative top-1
       `} />
-      <span>VIEW MORE</span>
+      <span className={clsx(
+        'shadow-underline hover:shadow-underline-hover',
+        'transition-shadow duration-500'
+      )}>VIEW MORE</span>
     </Link>
   );
 }
