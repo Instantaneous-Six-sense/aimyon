@@ -27,6 +27,8 @@ module.exports = {
       '2xl': '1.1rem',
       '3xl': ['1.3rem', '1.7rem'],
       '4xl': ['1.5rem', '1.9rem'],
+      '5xl': ['1.7rem', '2rem'],
+      '6xl': ['2rem', '2.1rem'],
       'title': ['3rem', '4.5rem'],
     },
     extend: {
@@ -61,6 +63,10 @@ module.exports = {
         lg: 'var(--radius)',
         md: 'calc(var(--radius) - 2px)',
         sm: 'calc(var(--radius) - 4px)',
+      },
+      boxShadow: {
+        'underline': 'inset 0 -3px 0 -1px #FFF986',
+        'underline-hover': 'inset 0 -10px 0 -1px #FFF986',
       },
       colors: {
         border: 'hsl(var(--border))',

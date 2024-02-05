@@ -33,6 +33,7 @@
     "max-len": [
       "warn",
       { "code": 80 }
-  ]
+    ],
+    "no-trailing-spaces": "warn"
   }
 }

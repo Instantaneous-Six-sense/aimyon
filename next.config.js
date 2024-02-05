@@ -13,6 +13,8 @@ const AWS_S3_HOSTNAME =
     ? `${process.env.NEXT_PUBLIC_AWS_S3_BUCKET}.s3.${process.env.NEXT_PUBLIC_AWS_S3_REGION}.amazonaws.com`
     : undefined;
 
+const AWS_S3_IMAGE_HOSTNAME = 'storage.ai-myon.com';
+
 const createRemotePattern = (hostname) => hostname
   ? {
     protocol: 'http',
@@ -24,17 +26,26 @@ const createRemotePattern = (hostname) => hostname
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  async redirects() {
+    return [
+      {
+        source: '/p/:photoId',
+        destination: '/gallery/p/:photoId',
+        permanent: true,
+      },
+      {
+        source: '/grid',
+        destination: '/gallery/grid',
+        permanent: true,
+      },
+    ];
+  },
   images: {
     imageSizes: [200],
     remotePatterns: []
       .concat(createRemotePattern(VERCEL_BLOB_HOSTNAME))
-      .concat(createRemotePattern(AWS_S3_HOSTNAME))
-      .concat({
-        protocol: 'http',
-        hostname: 'storage.ai-myon.com',
-        port: '', pathname:
-        '/**',
-      }),
+      .concat(createRemotePattern(AWS_S3_IMAGE_HOSTNAME))
+      .concat(createRemotePattern(AWS_S3_HOSTNAME)),
     minimumCacheTTL: 31536000,
   },
 };
