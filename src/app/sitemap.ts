@@ -9,16 +9,18 @@
  * `routes` 상수는 정적 라우트의 사이트맵 항목을 생성합니다.
  */
 
-import { getSitemapInfos } from '@/services/vercel-postgres';
+import { getRecords, getSitemapInfos } from '@/services/vercel-postgres';
 import { SITE_CREATED_AT, SITE_TAGS } from '@/site/config';
 import {
   PATH_ADMIN,
   PATH_GALLERY,
   PATH_GRID,
   PATH_OG,
+  PATH_RECORD,
   PATH_SETS,
   PATH_SIGN_IN,
   PREFIX_PHOTO,
+  PREFIX_RECORD,
   PREFIX_TAG,
 } from '@/site/paths';
 import type { MetadataRoute } from 'next';
@@ -31,6 +33,11 @@ export default async function sitemap(): Promise<Sitemap> {
     lastModified: sitemapInfo.taken_at_naive.replace(' ', 'T') + '+09:00',
     priority: 0.8,
   }));
+  const records: Sitemap = (await getRecords()).map((sitemapInfo) => ({
+    url: `https://ai-myon.com${PREFIX_RECORD}/${sitemapInfo.title}`,
+    lastModified: sitemapInfo.release_at,
+    priority: 0.8,
+  }));
   const tags: Sitemap = SITE_TAGS.map((tag) => ({
     url: `https://ai-myon.com${PREFIX_TAG}/${tag}`,
     lastModified: SITE_CREATED_AT,
@@ -38,7 +45,16 @@ export default async function sitemap(): Promise<Sitemap> {
   }));
 
   const routes: Sitemap =
-  ['', PATH_GALLERY, PATH_GRID, PATH_SETS, PATH_OG, PATH_ADMIN, PATH_SIGN_IN]
+  [
+    '',
+    PATH_GALLERY,
+    PATH_GRID,
+    PATH_RECORD,
+    PATH_SETS,
+    PATH_OG,
+    PATH_ADMIN,
+    PATH_SIGN_IN,
+  ]
     .map(
       (route) => ({
         url: 'https://ai-myon.com' + route,
@@ -47,5 +63,5 @@ export default async function sitemap(): Promise<Sitemap> {
       })
     );
 
-  return [...routes,  ...tags, ...photos];
+  return [...routes,  ...tags, ...photos, ...records];
 }
