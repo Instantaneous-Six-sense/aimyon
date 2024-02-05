@@ -13,6 +13,7 @@ import { Tags } from '@/tag';
 import { FilmSimulation, FilmSimulations } from '@/simulation';
 import { PRIORITY_ORDER_ENABLED } from '@/site/config';
 import { Contents, Records, RecordsTrack } from '@/contents';
+import { groupBy } from '@/utility/object';
 
 const PHOTO_DEFAULT_LIMIT = 100;
 
@@ -461,11 +462,32 @@ export const getPhotosFilmSimulationCount = (simulation: FilmSimulation) =>
 export const getContents = () => sql<Contents>`
   SELECT DISTINCT * FROM contents
   `.then(({ rows }) => rows);
+
+export const getRecord = async (recordNo: number) => {
+  const querys = [
+    sql<Records>`
+      SELECT DISTINCT * FROM record
+      WHERE record_no=${recordNo}
+    `.then(({ rows }) => rows[0]),
+    sql<RecordsTrack>`
+      SELECT DISTINCT * FROM record_track
+      WHERE record_no=${recordNo}
+    `.then(({ rows }) => rows),
+  ];
+
+  const [record, recordTrack] =
+    await Promise.all(querys) as [Records, RecordsTrack[]];
+
+  record.track = groupBy(recordTrack, 'side');
+
+  return record;
+};
+
 export const getRecords = async () => {
   const querys = [sql<Records>`
     SELECT DISTINCT * FROM record
     ORDER BY release_at DESC
-  `.then(async ({ rows }) => rows), 
+  `.then(async ({ rows }) => rows),
   sql<RecordsTrack>`
     SELECT DISTINCT * FROM record_track
   `.then(({ rows }) => rows)];
@@ -474,8 +496,10 @@ export const getRecords = async () => {
     (await Promise.all(querys)) as [Records[], RecordsTrack[]];
 
   records.forEach((row) => {
-    row.track =
-      recordsTrack.filter(({ record_no }) => record_no === row.record_no);
+    row.track = groupBy(
+      recordsTrack.filter(({ record_no }) => record_no === row.record_no),
+      'side'
+    );
   });
 
   return records;

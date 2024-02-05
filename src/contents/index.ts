@@ -16,10 +16,11 @@ export type Records = {
   catalogue_no: string
   price: number
   image: string
-  track?: RecordsTrack[]
+  track?: { [key in string]: RecordsTrack[] }
 }
 export type RecordsTrack = {
   record_no: number
+  side: string
   index: number
   title: string
 }
