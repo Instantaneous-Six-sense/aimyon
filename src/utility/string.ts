@@ -24,3 +24,6 @@ export const parameterize = (string: string) =>
     // Removes all non-alphanumeric characters
     .replaceAll(/([^a-z0-9-])/gi, '')
     .toLowerCase();
+
+export const stripHtml = (string: string) =>
+  string.replace(/<[^>]*>?/gm, '');
