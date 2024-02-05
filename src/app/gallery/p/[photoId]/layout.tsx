@@ -61,7 +61,7 @@ export default async function PhotoPage({
   const photo = photos.find(p => p.id === photoId);
 
   if (!photo) { redirect(PATH_GALLERY); }
-  
+
   const isPhotoFirst = photos.findIndex(p => p.id === photoId) === 0;
 
   // Warm OG image without waiting on response
