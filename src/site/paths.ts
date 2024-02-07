@@ -23,6 +23,7 @@ export const PREFIX_TAG             = '/gallery/tag';
 export const PREFIX_CAMERA          = '/gallery/shot-on';
 export const PREFIX_FILM_SIMULATION = '/gallery/film';
 export const PREFIX_RECORD          = '/record/r';
+export const PREFIX_TRACK           = '/record/s';
 
 // Dynamic paths
 const PATH_PHOTO_DYNAMIC            = `${PREFIX_PHOTO}/[photoId]`;
@@ -233,11 +234,17 @@ export const isPathFilmSimulationPhotoShare = (pathname = '') =>
 export const checkPathPrefix = (pathname = '', prefix: string) =>
   pathname.toLowerCase().startsWith(prefix);
 
+export const isPathGallery = (pathname?: string) =>
+  checkPathPrefix(pathname, PATH_GALLERY);
+
 export const isPathGrid = (pathname?: string) =>
   checkPathPrefix(pathname, PATH_GRID);
 
 export const isPathSets = (pathname?: string) =>
   checkPathPrefix(pathname, PATH_SETS);
+
+export const isPathRecord = (pathname?: string) =>
+  checkPathPrefix(pathname, PATH_RECORD);
 
 export const isPathSignIn = (pathname?: string) =>
   checkPathPrefix(pathname, PATH_SIGN_IN);

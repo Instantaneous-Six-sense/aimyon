@@ -12,6 +12,7 @@ import {
   isPathAdmin,
   isPathGrid,
   isPathProtected,
+  isPathRecord,
   isPathSets,
   isPathSignIn,
 } from '@/site/paths';
@@ -45,6 +46,8 @@ export default function NavClient({
       return 'grid';
     } else if (isPathSets(pathname)) {
       return 'sets';
+    } else if (isPathRecord(pathname)) {
+      return 'record';
     } else if (isPathProtected(pathname)) {
       return 'admin';
     }

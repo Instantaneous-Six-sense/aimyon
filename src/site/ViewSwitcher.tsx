@@ -3,15 +3,15 @@ import SwitcherItem from '@/components/SwitcherItem';
 import IconFullFrame from '@/site/IconFullFrame';
 import IconGrid from '@/site/IconGrid';
 import {
-  PATH_ADMIN_PHOTOS, PATH_GALLERY, PATH_GRID, PATH_ROOT, PATH_SETS,
+  PATH_ADMIN_PHOTOS, PATH_GALLERY, PATH_GRID, PATH_RECORD, PATH_ROOT, PATH_SETS,
 } from '@/site/paths';
 import { BiLockAlt } from 'react-icons/bi';
 import IconSets from './IconSets';
-import IconCat from './IconCat';
 import IconCake from './IconCake';
+import { LuListMusic } from 'react-icons/lu';
 
 export type SwitcherSelection =
-  'home' | 'full-frame' | 'grid' | 'sets' | 'admin';
+  'home' | 'full-frame' | 'grid' | 'sets' | 'record' | 'admin';
 
 export default function ViewSwitcher({
   currentSelection,
@@ -37,6 +37,12 @@ export default function ViewSwitcher({
         icon={<IconGrid />}
         href={PATH_GRID}
         active={currentSelection === 'grid'}
+        noPadding
+      />
+      <SwitcherItem
+        icon={<LuListMusic className={'w-[28px] h-[24px]'} strokeWidth={1.2} />}
+        href={PATH_RECORD}
+        active={currentSelection === 'record'}
         noPadding
       />
       <SwitcherItem
