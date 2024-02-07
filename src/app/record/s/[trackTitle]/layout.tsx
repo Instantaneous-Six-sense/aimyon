@@ -1,5 +1,4 @@
 import { getRecordCached } from '@/cache';
-import Animate from '@/components/Animate';
 import TrackList from '@/components/TrackList';
 import { findRecordByTrackName } from '@/contents';
 import { SITE_DOMAIN } from '@/site/config';
@@ -82,9 +81,7 @@ export default async function RecordTrackLayout(
         />
         <div className="flex flex-col gap-2">
           <p className="text-neutral-600 dark:text-neutral-400">楽曲</p>
-          <h1 className={clsx(
-            'text-6xl font-bold'
-          )}>
+          <h1 className={clsx('text-6xl font-bold')}>
             {decodeURI(trackTitle)}
           </h1>
           <h3 className={clsx('text-xl')}>

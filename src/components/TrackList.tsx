@@ -8,7 +8,7 @@ export default function TrackList({ tracks }: { tracks: Records['track']}) {
   }
 
   return (
-    <div id="tracks" className="py-8 flex flex-col gap-1.5">
+    <div id="tracks" className="py-8 flex flex-col gap-1.5 w-full">
       {Object.entries(tracks!).map(([side, tracks], sideIndex) => (
         <div key={sideIndex}>
           {
