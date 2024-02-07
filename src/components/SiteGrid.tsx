@@ -21,6 +21,7 @@ export default function SiteGrid({
       'gap-x-4 lg:gap-x-6',
       'gap-y-4',
       'max-w-7xl',
+      'static sm:sticky sm:top-0 sm:bg-white sm:dark:bg-black sm:z-10'
     )}>
       <div className={clsx(
         'col-span-1 md:col-span-9',
