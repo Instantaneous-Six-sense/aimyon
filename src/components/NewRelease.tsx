@@ -6,9 +6,10 @@ import ViewMore from './ViewMore';
 
 import dynamic from 'next/dynamic';
 import TrackList from './TrackList';
+import RecordDescription from './RecordDescription';
 
 const NewReleaseDescription = dynamic(() =>
-  import('./NewReleaseDescription'), { ssr: false });
+  import('./RecordDescription'), { ssr: false });
 
 export type NewReleaseProps = {
   record: Records
@@ -41,46 +42,11 @@ export default function NewRelease({ record }: NewReleaseProps) {
             <p className="text-2xl font-glacial">
               {formatDateFromOrientalString(record.release_at)} RELEASE
             </p>
-            <RecordDetail
-              price={record.price}
-              catalogueNo={record.catalogue_no}
-              tracks={record.track}
-            />
-            <NewReleaseDescription description={record.description} />
+            <RecordDescription record={record} />
             <ViewMore href={'/record'} />
           </div>
         </div>
       </div>
     </section>
-  );
-}
-
-type RecordDetailProps = {
-  price: Records['price'];
-  catalogueNo: Records['catalogue_no']
-  tracks: Records['track'];
-}
-
-
-function RecordDetail({ price, catalogueNo, tracks }: RecordDetailProps) {
-  const priceFormat =
-    ['ja-JP', { style: 'currency', currency: 'JPY' }] as const;
-
-  return (
-    <>
-      <div className={clsx(
-        'flex items-center gap-2',
-        'text-neutral-400 text-base pt-4')}
-      >
-        <p>{
-          new Intl.NumberFormat(...priceFormat).format(
-            price,
-          )
-        }(税込)</p>
-        <p>/</p>
-        <p>{catalogueNo}</p>
-      </div>
-      <TrackList tracks={tracks} />
-    </>
   );
 }
