@@ -1,5 +1,4 @@
-import LyricsWrapper from '@/site/record/LyricsWrapper';
-import clsx from 'clsx';
+/* eslint-disable max-len */
 
 export default function Track() {
   return(

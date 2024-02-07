@@ -1,8 +1,6 @@
-import LyricsWrapper from '@/site/record/LyricsWrapper';
-import clsx from 'clsx';
+/* eslint-disable max-len */
 
 export default  async function Track() {
-  await new Promise<void>(resolve => setTimeout(resolve, 3000));
   return(
     <div id="track-lyrics" className={'text-2xl flex flex-col'}>
       <span><ruby>電柱<rt>でんちゅう</rt></ruby>にぶら<ruby>下<rt>さ</rt></ruby>がったままの<ruby>初恋<rt>はつこい</rt></ruby>は</span>
