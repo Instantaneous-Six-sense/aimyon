@@ -107,7 +107,7 @@ export default function RootLayout({
 }) {
   return (
     <html
-      lang="en"
+      lang="ja"
       // Suppress hydration errors due to
       // next-themes behavior
       suppressHydrationWarning
@@ -125,7 +125,6 @@ export default function RootLayout({
               'lg:mx-6 lg:mb-6',
             )}>
               <Suspense fallback={<NavClient />}>
-                {/* @ts-ignore */}
                 <Nav />
               </Suspense>
               <div className={clsx(
@@ -135,7 +134,6 @@ export default function RootLayout({
                 {children}
               </div>
               <Suspense fallback={<FooterClient />}>
-                {/* @ts-ignore */}
                 <Footer />
               </Suspense>
             </main>
