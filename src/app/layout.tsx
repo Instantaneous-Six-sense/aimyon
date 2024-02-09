@@ -1,7 +1,6 @@
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/react';
 import { clsx } from 'clsx/lite';
-import { IBM_Plex_Mono, Roboto } from 'next/font/google';
 import { Metadata } from 'next';
 import {
   BASE_URL,
@@ -18,45 +17,9 @@ import Footer from '@/site/Footer';
 import { Suspense } from 'react';
 import FooterClient from '@/site/FooterClient';
 import NavClient from '@/site/NavClient';
-import localFont from 'next/font/local';
 
 import '../site/globals.css';
-
-const ibmPlexMono = IBM_Plex_Mono({
-  subsets: ['latin'],
-  weight: ['400', '500', '700'],
-  variable: '--font-ibm-plex-mono',
-});
-const roboto = Roboto({
-  subsets: ['latin'],
-  weight: ['400', '500', '700', '900'],
-  variable: '--font-roboto',
-});
-const glacial = localFont({
-  src: [
-    {
-      path: '../../public/font/glacialindifference-bold-webfont.woff2',
-    },
-  ],
-  variable: '--font-glacial',
-});
-const yakuhan = localFont({
-  src: [
-    {
-      weight: '400',
-      path: '../../public/font/YakuHanJP-Regular.woff2',
-    },
-    {
-      weight: '700',
-      path: '../../public/font/YakuHanJP-Bold.woff2',
-    },
-    {
-      weight: '900',
-      path: '../../public/font/YakuHanJP-Black.woff2',
-    },
-  ],
-  variable: '--font-yakuhan',
-});
+import { fontsClass } from '@/site/font';
 
 export const metadata: Metadata = {
   title: SITE_TITLE,
@@ -112,12 +75,7 @@ export default function RootLayout({
       // next-themes behavior
       suppressHydrationWarning
     >
-      <body className={clsx(
-        ibmPlexMono.variable,
-        roboto.variable,
-        glacial.variable,
-        yakuhan.variable
-      )}>
+      <body className={clsx(...fontsClass)}>
         <StateProvider>
           <ThemeProviderClient>
             <main className={clsx(

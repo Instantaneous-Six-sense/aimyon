@@ -4,6 +4,8 @@ type RecordLayoutTypes = {
   children: React.ReactNode
 }
 
+
+
 export default function RecordLayout({ children }: RecordLayoutTypes) {
   return (
     <Animate>

@@ -20,11 +20,11 @@ export async function GET(
     getIBMPlexMonoMedium(),
     getImageCacheHeadersForAuth(await auth()),
   ]);
-  
+
   if (!photo) { return new Response('Photo not found', { status: 404 }); }
 
   const { width, height } = IMAGE_OG_DIMENSION;
-  
+
   return new ImageResponse(
     <PhotoImageResponse {...{ photo, width, height, fontFamily }} />,
     { width, height, fonts, headers },
